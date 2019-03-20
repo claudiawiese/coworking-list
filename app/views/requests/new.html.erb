@@ -1,0 +1,9 @@
+<%= simple_form_for (@request) do |f| %>
+  <%= f.input :client_first_name %>
+  <%= f.input :client_last_name %>
+  <%= f.input :email %>
+  <%= f.input :phone %>
+  <%= f.input :bio %>
+
+  <%= f.submit "Submit Request", class: "btn btn-primary" %>
+<% end %>
