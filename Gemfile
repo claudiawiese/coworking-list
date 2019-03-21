@@ -29,3 +29,5 @@ group :development, :test do
 end
 
 gem 'postmark-rails'
+
+gem 'letter_opener', group: :development

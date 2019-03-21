@@ -1,9 +1,11 @@
 <% @requests.each do |request| %>
-<ol>
+<ul>
   <li>  Name: <%= request.client_first_name %>
         <%= request.client_last_name %>,
         Email: <%= request.email %>,
-        Phone: <%= request.phone %> <br>
+        Phone: <%= request.phone %>
+        Status: <%= request.status %> <br>
         Biography: <%= request.bio %>
       </li>
+  </ul>
 <% end %>
