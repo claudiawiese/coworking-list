@@ -7,4 +7,9 @@ class ClientMailerPreview < ActionMailer::Preview
   ClientMailer.confirmation_email(request)
   end
 
+  def confirmation_three_months
+  request = Request.last
+  ClientMailer.confirmation_three_months(request)
+  end
+
 end

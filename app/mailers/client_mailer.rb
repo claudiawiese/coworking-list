@@ -13,4 +13,13 @@ class ClientMailer < ApplicationMailer
       subject:  "Email Confirmation"
     )
   end
+
+  def confirmation_three_months(request)
+    @request = Request.last
+    mail(
+      to:       @request.email,
+      subject:  "Waiting List Subscription - Confirmation"
+    )
+
+  end
 end
