@@ -1,0 +1,9 @@
+<% @requests.each do |request| %>
+<ol>
+  <li>  Name: <%= request.client_first_name %>
+        <%= request.client_last_name %>,
+        Email: <%= request.email %>,
+        Phone: <%= request.phone %> <br>
+        Biography: <%= request.bio %>
+      </li>
+<% end %>
