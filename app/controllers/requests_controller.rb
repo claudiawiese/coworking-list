@@ -12,9 +12,9 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     @request.status = "unconfirmed"
     if @request.save
-        ClientMailer.confirmation_email(@confirmation).deliver_now
-        ClientMailer.confirmation_three_months(@confirmation).deliver_later(wait_until: 3.minutes.from_now)
-      end
+      ClientMailer.confirmation_email(@request).deliver_now
+      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
+      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 6.months.from_now)
     redirect_to requests_path
     else
       render :new

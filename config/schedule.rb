@@ -13,8 +13,8 @@
 #   rake "some:great:rake:task"
 # end
 #
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
+every :day , at: '12:09pm' do
+   rake 'send_confirmation_three_months'
+end
 
 # Learn more: http://github.com/javan/whenever
