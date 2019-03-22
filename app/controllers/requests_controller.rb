@@ -1,7 +1,6 @@
 class RequestsController < ApplicationController
   def index
     @requests = Request.all
-    @counter = 0
   end
 
   def new

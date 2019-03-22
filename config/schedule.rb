@@ -13,8 +13,8 @@
 #   rake "some:great:rake:task"
 # end
 #
-every :day , at: '12:09pm' do
-   rake 'send_confirmation_three_months'
+every :hour do
+  rake 'send_confirmation_three_months'
 end
 
 # Learn more: http://github.com/javan/whenever
