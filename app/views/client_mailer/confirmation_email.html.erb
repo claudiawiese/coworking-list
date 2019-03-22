@@ -1,0 +1,12 @@
+<p>Dear <%= @request.client_first_name %> <%=@request.client_last_name%>, </p>
+
+<p>
+  Thanks for subscribing to our coworking waiting list.To be accepted on the list, please confirm your email address by clicking on the link below: <br>
+  <%= link_to "Confirm your email address", confirm_request_url(@request)%>
+</p>
+
+<p> Thank you and see you soon </p>
+<p> Sincerly, </p>
+<p> Yours French Co-working Team </p>
+
+

@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
   def index
     @requests = Request.all
+    @counter = 0
   end
 
   def new
@@ -9,19 +10,50 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
+    @request.status = "unconfirmed"
     if @request.save
-      redirect_to requests_path
+      ClientMailer.confirmation_email(@request).deliver_now
+    redirect_to requests_path
     else
       render :new
     end
   end
 
-  def delete
+  def confirm
+    @request = Request.find(params[:id])
+    if @request.update(status: 'confirmed')
+      flash[:notice] = "Thanks for your email confirmation"
+      ClientMailer.confirmation_three_months(@request).deliver_now
+      redirect_to requests_path
+    else
+      redirect_to requests_path
+    end
   end
-end
 
-private
+  def confirm_three_months
+    @request = Request.find(params[:id])
+    if @request.status == 'confirmed'
+      if @request.update(status: 'confirmed')
+        flash[:notice] = "Thanks for having reconfirmed your subscription"
+        ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 2.minutes.from_now)
+        redirect_to requests_path
+      else
+        redirect_to requests_path
+      end
+    elsif @request.status == 'accepted'
+       if @request.update(status: 'accepted')
+        flash[:notice] = "Thanks for having reconfirmed your subscription"
+        ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 2.minutes.from_now)
+        redirect_to requests_path
+      else
+        redirect_to requests_path
+      end
+    end
+  end
 
-def request_params
-  params.require(:request).permit(:client_first_name, :client_last_name, :email, :phone, :bio, :date)
+  private
+
+  def request_params
+    params.require(:request).permit(:client_first_name, :client_last_name, :email, :phone, :bio, :date, :status)
+  end
 end
