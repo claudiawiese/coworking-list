@@ -11,4 +11,7 @@ class Request < ApplicationRecord
   scope :expired, -> { where(status: 'expired') }
   scope :accept!, -> { where(status: 'confirmed').update(status: 'accepted') }
 
+  def accept!
+    self.update(status: "accepted")
+  end
 end
