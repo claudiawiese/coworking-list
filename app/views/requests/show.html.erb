@@ -1,0 +1,21 @@
+<div class="container">
+<div class="message">
+  <img class="avatar-large">
+  <div class="message-name">
+    <h3><%=@request.client_first_name%> <%=@request.client_last_name%></h3>
+    <p><%=@request.created_at%> </p>
+  </div>
+  <div class="message-body">
+    <p><strong>Biography:</strong></p>
+    <p>
+     <%=@request.bio%>
+    </p>
+  </div>
+  <div class="message-status">
+    <p class="status pending"><%=@request.status%></p>
+    <p class="place">Place: <% @list = Request.accepted.pluck(:id) %>
+<%counter = 1 %>
+<%= counter += @list.index(@request.id).to_i %></p>
+  </div>
+</div>
+</div>

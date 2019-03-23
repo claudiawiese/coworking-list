@@ -1,7 +1,12 @@
 class RequestsController < ApplicationController
+
   def index
     @requests = Request.all
     @counter = 0
+  end
+
+  def show
+    @request = Request.find(params[:id])
   end
 
   def new
