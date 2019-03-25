@@ -13,9 +13,10 @@
   </div>
   <div class="message-status">
     <p class="status pending"><%=@request.status%></p>
-    <p class="place">Place: <% @list = Request.accepted.pluck(:id) %>
-<%counter = 1 %>
-<%= counter += @list.index(@request.id).to_i %></p>
+    <% if @list !=nil %>
+    <p class="place">Place: <%= @counter += @list.index(@request.id).to_i %></p>
+    <% end %>
   </div>
 </div>
+<a class="btn btn-primary btn-lg", href="/requests">See Waiting List</a>
 </div>
