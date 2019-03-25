@@ -13,7 +13,8 @@ class RequestsController < ApplicationController
     @request.status = "unconfirmed"
     if @request.save
       ClientMailer.confirmation_email(@request).deliver_now
-    redirect_to requests_path
+      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
+      redirect_to requests_path
     else
       render :new
     end
@@ -23,8 +24,7 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     if @request.update(status: 'confirmed')
       flash[:notice] = "Thanks for your email confirmation"
-      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 5.minutes.from_now)
-      StatusUpdateJob.set(wait_until: 1.minute).perform_later(@request.id)
+      #StatusUpdateJob.set(wait_until: 3.months.from_now).perform_later(@request.id)
       redirect_to requests_path
     else
       redirect_to requests_path
@@ -33,10 +33,10 @@ class RequestsController < ApplicationController
 
   def confirm_three_months
     @request = Request.find(params[:id])
-    if @request.status == 'accepted'
-      if @request.update(status: 'accepted')
+    if @request.status == 'confirmed'
+      if @request.update(status: 'confirmed')
         flash[:notice] = "Thanks for having reconfirmed your subscription"
-        ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 2.minutes.from_now)
+        ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: (3.months.from_now + 15.days))
         redirect_to requests_path
       else
         redirect_to requests_path

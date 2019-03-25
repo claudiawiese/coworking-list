@@ -1,9 +1,9 @@
 <p>Dear <%= @request.client_first_name %> <%=@request.client_last_name%> </p>
 
 <p>
-  Your subscription on our French Coworking list is soon expiring.
+  Your subscription on our French Coworking list is expiring in 15 days.
   You are currently on place
-<% @list = Request.accepted.pluck(:id) %>
+<% @list = Request.confirmed.pluck(:id) %>
 <%counter = 1 %>
 <%= counter += @list.index(@request.id).to_i %>
 
