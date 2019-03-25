@@ -13,8 +13,9 @@
 #   rake "some:great:rake:task"
 # end
 #
-every :hour do
-  rake 'send_confirmation_three_months'
-end
 
 # Learn more: http://github.com/javan/whenever
+
+my_first_job:
+  cron: "*/5 * * * *"
+  class: "StatusUpdateWorker"

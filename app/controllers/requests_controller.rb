@@ -31,7 +31,8 @@ class RequestsController < ApplicationController
     if @request.update(status: 'confirmed')
       flash[:notice] = "Thanks for your email confirmation"
       ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 1.minute.from_now)
-      StatusUpdateJob.set(wait_until: 3.minute.from_now).perform_later(@request.id)
+      chron_job
+      #StatusUpdateJob.set(wait_until: 3.minute.from_now).perform_later(@request.id)
       redirect_to request_path(@request)
     else
       redirect_to request_path(@request)
@@ -45,7 +46,7 @@ class RequestsController < ApplicationController
       if @request.update(status: 'confirmed')
         flash[:notice] = "Thanks for having reconfirmed your subscription"
         ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: (3.months.from_now + 15.days))
-        StatusUpdateJob.set(wait_until: 3.minute.from_now).perform_later(@request.id)
+        #StatusUpdateJob.set(wait_until: 3.minute.from_now).perform_later(@request.id)
         redirect_to request_path(@request)
       else
         redirect_to request_path
@@ -78,3 +79,4 @@ class RequestsController < ApplicationController
     end
   end
 end
+Status update worker - every 5min
