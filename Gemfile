@@ -32,3 +32,5 @@ gem 'postmark-rails'
 
 gem 'letter_opener', group: :development
 gem 'whenever', require: false
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
