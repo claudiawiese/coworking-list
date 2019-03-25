@@ -18,9 +18,9 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     @request.status = "unconfirmed"
     if @request.save
+      flash[:notice] = "Thanks for your interest, you will shortly receive an email to confirm your subscription"
       ClientMailer.confirmation_email(@request).deliver_now
-      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 1.minute.from_now)
-      redirect_to requests_path
+      redirect_to request_path(@request)
     else
       render :new
     end
@@ -30,7 +30,8 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     if @request.update(status: 'confirmed')
       flash[:notice] = "Thanks for your email confirmation"
-      #StatusUpdateJob.set(wait_until: 3.months.from_now).perform_later(@request.id)
+      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 1.minute.from_now)
+      StatusUpdateJob.set(wait_until: 3.minute.from_now).perform_later(@request.id)
       redirect_to request_path(@request)
     else
       redirect_to request_path(@request)
@@ -44,14 +45,15 @@ class RequestsController < ApplicationController
       if @request.update(status: 'confirmed')
         flash[:notice] = "Thanks for having reconfirmed your subscription"
         ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: (3.months.from_now + 15.days))
+        StatusUpdateJob.set(wait_until: 3.minute.from_now).perform_later(@request.id)
         redirect_to request_path(@request)
       else
         redirect_to request_path
       end
     end
     if @request.status == 'expired'
-        flash[:notice] = "Sorry your subscription has expired"
-        redirect_to request_path(@request)
+      flash[:notice] = "Sorry your subscription has expired, please subscribe again"
+      redirect_to new_request_path
     end
   end
 
@@ -66,6 +68,10 @@ class RequestsController < ApplicationController
     if @request.status == "confirmed"
       @list = Request.confirmed.pluck(:id)
     elsif @request.status == "accepted"
+      if @list != nil
+        @list.delete_at(@list.index(@request.id))
+      end
+    elsif @request.status == "expired"
       if @list != nil
         @list.delete_at(@list.index(@request.id))
       end
