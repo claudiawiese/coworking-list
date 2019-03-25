@@ -23,7 +23,8 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     if @request.update(status: 'confirmed')
       flash[:notice] = "Thanks for your email confirmation"
-      ClientMailer.confirmation_three_months(@request).deliver_now
+      ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 5.minutes.from_now)
+      StatusUpdateJob.set(wait_until: 1.minute).perform_later(@request.id)
       redirect_to requests_path
     else
       redirect_to requests_path
@@ -41,6 +42,10 @@ class RequestsController < ApplicationController
         redirect_to requests_path
       end
     end
+    if @request.status == 'expired'
+        flash[:notice] = "Sorry your subscription has expired"
+        redirect_to requests_path
+    end
   end
 
   private
@@ -48,4 +53,5 @@ class RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:client_first_name, :client_last_name, :email, :phone, :bio, :date, :status)
   end
+
 end

@@ -9,4 +9,6 @@ Rails.application.routes.draw do
       get 'confirm_three_months'
     end
   end
+
+  require "sidekiq/web"
 end

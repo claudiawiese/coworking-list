@@ -1,7 +1,7 @@
 <p>Dear <%= @request.client_first_name %> <%=@request.client_last_name%> </p>
 
 <p>
-  Thanks for subscribing to our coworking waiting list.
+  Your subscription on our French Coworking list is soon expiring.
   You are currently on place
 <% @list = Request.accepted.pluck(:id) %>
 <%counter = 1 %>
