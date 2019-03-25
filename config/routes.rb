@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
 
-  resources :requests, only: [ :index, :new, :create] do
+  resources :requests, only: [ :index, :new, :create, :show] do
    member do
       get 'confirm'
     end

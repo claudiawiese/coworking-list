@@ -1,0 +1,26 @@
+<br>
+<div class="container">
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-6">
+    <div class="card">
+      <div class="card-category">
+        <h3><%=@request.client_first_name.upcase%> <%=@request.client_last_name.upcase%></h3>
+        <p>Date of subscription: <%=@request.created_at%> </p>
+        <p>Email Address: <%=@request.email%></p>
+        <p>Phone Number: <%=@request.phone%></p>
+        <p>Status: <%=@request.status%></p>
+        <% if @list !=nil%>
+        <p class="place">Place: <%= @counter += @list.index(@request.id).to_i %></p>
+        <% end %>
+      </div>
+      <div class="card-description">
+        <h2>BIOGRAPHY</h2>
+        <p><%= @request.bio %></p>
+      </div>
+      <img class="card-user" src=".avatar">
+    </div>
+    <br>
+    <a class="btn btn-primary btn-lg", href="/requests">Waiting List</a>
+  </div>
+</div>
+</div>

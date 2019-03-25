@@ -1,33 +1,50 @@
 <div class="container">
-<div class="card">
-
-<h1> Coworking List </h1>
-<table style="width: 1000px; border:0; padding: 0; color: #444444; font-family: Roboto, sans-serif; font-size: 18px; font-weight: normal; line-height: 20px;">
-  <thead>
-          <tr>
-            <th width="100px;" style="padding:5px 0;">Place </th>
-            <th width="150px;" style="padding:5px 0;">First Name </th>
-            <th width="150px;" style="padding:5px 0;">Last Name </th>
-            <th width="100px;" style="padding:5px 0;">Phone </th>
-            <th width="150px;" style="padding:5px 0;">Email </th>
-            <th width="120px;" style="padding:5px 0;">Status</th>
+  <div class="row">
+    <h1> Coworking Waiting List </h1>
+  </div>
+    <table class="table d-none d-lg-table" >
+      <thead>
+        <tr>
+          <th>Place </th>
+          <th>First Name </th>
+          <th>Last Name </th>
+          <th>Phone </th>
+          <th>Email </th>
+          <th>Status</th>
         </tr>
-    </thead>
-<tbody>
-  <% @requests.each do |request| %>
-  <% if request.status == "confirmed" %>
-<tr>
-    <td width="100px;" style="padding:5px 0;">  <%= @counter += 1 %> </td>
-    <td> <%=request.client_first_name%></td>
-    <td> <%=request.client_last_name%></td>
-    <td> <%=request.phone%></td>
-    <td> <%=request.email%></td>
-    <td> <%=request.status%></td>
-  <%end%>
-<%end%>
-</tr>
-</tbody>
-</table>
+      </thead>
+      <tbody>
+        <% @requests.each do |request| %>
+        <% if request.status == "confirmed" %>
+        <tr>
+          <td> <%= @counter += 1 %> </td>
+          <td> <%= link_to "#{request.client_first_name}", request_path(request.id)%></td>
+          <td> <%=request.client_last_name%></td>
+          <td> <%=request.phone%></td>
+          <td> <%=request.email%></td>
+          <td> <%=request.status%></td>
+          <%end%>
+          <%end%>
+        </tr>
 
-</div>
+      <table class="table d-sx-table d-md-table d-lg-none">
+      <thead>
+        <tr>
+          <th>Place </th>
+          <th>First Name </th>
+          <th >Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @requests.each do |request| %>
+        <% if request.status == "confirmed" %>
+        <tr>
+          <td> <%= @counter += 1 %> </td>
+          <td> <%=request.client_first_name%></td>
+          <td> <%=request.status%></td>
+          <%end%>
+          <%end%>
+        </tr>
+      </tbody>
+    </table>
 </div>
