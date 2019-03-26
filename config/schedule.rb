@@ -16,6 +16,3 @@
 
 # Learn more: http://github.com/javan/whenever
 
-my_first_job:
-  cron: "*/5 * * * *"
-  class: "StatusUpdateWorker"
