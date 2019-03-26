@@ -60,7 +60,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:client_first_name, :client_last_name, :email, :phone, :bio, :date, :status)
+    params.require(:request).permit(:client_first_name, :client_last_name, :email, :phone, :bio, :date, :status, :photo)
   end
 
   def list

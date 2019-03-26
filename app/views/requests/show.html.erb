@@ -17,10 +17,11 @@
         <h2>BIOGRAPHY</h2>
         <p><%= @request.bio %></p>
       </div>
-      <img class="card-user" src=".avatar">
+      <%= cl_image_tag @request.photo, width: 100, height: 100, crop: :fill, class: 'card-user' %>
     </div>
     <br>
-    <a class="btn btn-primary btn-lg", href="/requests">Waiting List</a>
+    <a class="btn btn-primary btn-lg",  href="/requests">Waiting List</a>
   </div>
 </div>
 </div>
+
