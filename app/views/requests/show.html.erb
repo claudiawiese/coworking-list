@@ -5,7 +5,7 @@
       <div class="card">
         <div class="card-category">
           <h3><%=@request.client_first_name.upcase%> <%=@request.client_last_name.upcase%></h3>
-          <p>Date of subscription: <%=@request.created_at%> </p>
+          <p>Date of subscription: <%=@request.created_at.strftime("%m-%d-%Y")%> </p>
           <p>Email Address: <%=@request.email%></p>
           <p>Phone Number: <%=@request.phone%></p>
           <p>Status: <%=@request.status%></p>
