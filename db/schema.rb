@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_112841) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
     t.string "photo"
   end
 
