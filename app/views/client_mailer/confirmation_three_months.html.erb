@@ -1,7 +1,7 @@
 <p>Dear <%= @request.client_first_name %> <%=@request.client_last_name%> </p>
 
 <p>
-  Your subscription on our French Coworking list is expiring in 15 days.
+  Your subscription on our French Coworking waiting list is expiring in 5 days.
   You are currently on place
 <% @list = Request.confirmed.pluck(:id) %>
 <%counter = 1 %>
