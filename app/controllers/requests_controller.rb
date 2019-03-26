@@ -48,7 +48,7 @@ class RequestsController < ApplicationController
         StatusUpdateJob.set(wait_until: (3.months.from_now + 15.days)).perform_later(@request.id)
         redirect_to request_path(@request)
       else
-        redirect_to request_path
+        redirect_to request_path(@request)
       end
     end
     if @request.status == 'expired'
