@@ -8,7 +8,9 @@
           <%= f.input :email %>
           <%= f.input :phone %>
           <%= f.input :bio %>
-          <%= f.submit "Submit Request", class: "btn btn-primary"%>
+          <%= f.input :photo %>
+          <%= f.input :photo_cache, as: :hidden %>
+          <%= f.submit "Submit Request", class: "btn btn-primary" %>
         <% end %>
     </div>
   </div>
