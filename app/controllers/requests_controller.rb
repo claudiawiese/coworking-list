@@ -31,7 +31,7 @@ class RequestsController < ApplicationController
     if @request.update(status: 'confirmed')
       flash[:notice] = "Thanks for your email confirmation"
       ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
-      StatusUpdateJob.set(wait_until: (3.months.from_now + 5.days)).perform_later(@request.id)
+      StatusUpdateJob.set(wait_until: 3.months.from_now + 5.days).perform_later(@request.id)
       redirect_to request_path(@request)
     else
       redirect_to request_path(@request)
@@ -42,10 +42,10 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     list
     if @request.status == 'confirmed'
-      if @request.update(status: 'confirmed')
+      if @request.update(status: 'reconfirmed')
         flash[:notice] = "Thanks for having reconfirmed your subscription"
         ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
-        StatusUpdateJob.set(wait_until: (3.months.from_now + 15.days)).perform_later(@request.id)
+        StatusUpdateJob.set(wait_until: (3.months.from_now + 5.days)).perform_later(@request.id)
         redirect_to request_path(@request)
       else
         redirect_to request_path(@request)
