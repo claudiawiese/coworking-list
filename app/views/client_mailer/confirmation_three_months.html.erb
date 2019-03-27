@@ -5,7 +5,7 @@
   You are currently on place
 <% @list = Request.confirmed.pluck(:id) %>
 <%counter = 1 %>
-<%= counter += @list.index(@request.id).to_i %>
+<%= counter += @list.sort.index(@request.id).to_i %>
 
 in our waiting list. If you still want to be on our list, please click on the link below to reconfirm your subscription:
   <%= link_to "Re-confirm my subscription", confirm_three_months_request_url(@request)%>

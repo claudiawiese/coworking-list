@@ -14,8 +14,8 @@
         </tr>
       </thead>
       <tbody>
-        <% @requests.each do |request| %>
-        <% if request.status == "confirmed" %>
+        <% @requests.sort.each do |request| %>
+        <% if request.status == "confirmed"%>
         <tr>
           <td> <%= @counter += 1 %> </td>
           <td> <%= link_to "#{request.client_first_name}", request_path(request.id)%></td>
@@ -37,7 +37,7 @@
       </thead>
       <tbody>
         <% @requests.each do |request| %>
-        <% if request.status == "confirmed" %>
+        <% if request.status == "confirmed"%>
         <tr>
           <td> <%= @counter += 1 %> </td>
           <td> <%=request.client_first_name%></td>
@@ -48,3 +48,4 @@
       </tbody>
     </table>
 </div>
+
