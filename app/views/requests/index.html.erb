@@ -36,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @requests.each do |request| %>
+        <% @requests.sort.each do |request| %>
         <% if request.status == "confirmed"%>
         <tr>
           <td> <%= @counter += 1 %> </td>
