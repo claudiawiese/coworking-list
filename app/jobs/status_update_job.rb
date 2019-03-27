@@ -3,9 +3,9 @@ class StatusUpdateJob < ApplicationJob
 
   def perform(id)
     request = Request.find(id)
-    if request.status != 'reconfirmed'
+    if request.status_two != "reconfirmed"
       request.update(status: 'expired')
-    elsif request.status == 'reconfirmed'
+    elsif request.status_two == "reconfirmed"
       request.update(status: 'confirmed')
     end
   end

@@ -40,10 +40,10 @@ class RequestsController < ApplicationController
 
   def confirm_three_months
     @request = Request.find(params[:id])
-    list
     if @request.status == 'confirmed'
-      if @request.update(status: 'reconfirmed')
+      if @request.update(status_two: 'reconfirmed')
         flash[:notice] = "Thanks for having reconfirmed your subscription"
+        StatusTwoJob.set(wait_until: 2.months.from_now).perform_later(@request.id)
         ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
         StatusUpdateJob.set(wait_until: (3.months.from_now + 5.days)).perform_later(@request.id)
         redirect_to request_path(@request)
@@ -67,13 +67,14 @@ class RequestsController < ApplicationController
   @counter = 1
     if @request.status == "confirmed"
       @list = Request.confirmed.pluck(:id)
+      @list.sort
     elsif @request.status == "accepted"
       if @list != nil
-        @list.delete_at(@list.index(@request.id))
+        @list.delete_at(@list.index(@request.id).to_i)
       end
     elsif @request.status == "expired"
       if @list != nil
-        @list.delete_at(@list.index(@request.id))
+        @list.delete_at(@list.index(@request.id).to_i)
       end
     end
   end
