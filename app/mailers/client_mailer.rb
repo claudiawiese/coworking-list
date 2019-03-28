@@ -7,7 +7,7 @@ class ClientMailer < ApplicationMailer
   #
 
   def confirmation_email(request)
-    @request = Request.last
+    @request = request
     mail(
       to:       @request.email,
       subject:  "Email Confirmation"

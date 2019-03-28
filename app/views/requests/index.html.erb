@@ -14,16 +14,15 @@
         </tr>
       </thead>
       <tbody>
-        <% @requests.sort.each do |request| %>
-        <% if request.status == "confirmed"%>
+        <% @list.each do |request| %>
+        <% @request = Request.find(request)%>
         <tr>
-          <td> <%= @counter += 1 %> </td>
-          <td> <%= link_to "#{request.client_first_name}", request_path(request.id)%></td>
-          <td class="d-none d-md-table-cell"><%=request.client_last_name%></td>
-          <td class="d-none d-md-table-cell"> <%=request.phone%></td>
-          <td class="d-none d-sm-table-cell"> <%=request.email%></td>
-          <td> <%=request.status%></td>
-          <%end%>
+          <td> <%= @counter + @list.index(request)%> </td>
+          <td> <%= link_to "#{@request.client_first_name}", request_path(@request.id)%></td>
+          <td class="d-none d-md-table-cell"><%=@request.client_last_name%></td>
+          <td class="d-none d-md-table-cell"> <%=@request.phone%></td>
+          <td class="d-none d-sm-table-cell"> <%=@request.email%></td>
+          <td> <%=@request.status%></td>
           <%end%>
         </tr>
       </tbody>

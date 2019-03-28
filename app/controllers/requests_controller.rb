@@ -2,7 +2,8 @@ class RequestsController < ApplicationController
 
   def index
     @requests = Request.all
-    @counter = 0
+    @counter = 1
+    @list = list
   end
 
   def show
@@ -28,12 +29,12 @@ class RequestsController < ApplicationController
 
   def confirm
     @request = Request.find(params[:id])
+    @request.update(date: Time.now)
     if @request.update(status: 'confirmed')
       flash[:notice] = "Thanks for your email confirmation"
       ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
       StatusUpdateJob.set(wait_until: 3.months.from_now + 5.days).perform_later(@request.id)
-      redirect_to request_path(@request)
-    else
+      raise
       redirect_to request_path(@request)
     end
   end
@@ -46,10 +47,8 @@ class RequestsController < ApplicationController
         StatusTwoJob.set(wait_until: 2.months.from_now).perform_later(@request.id)
         ClientMailer.confirmation_three_months(@request).deliver_later(wait_until: 3.months.from_now)
         StatusUpdateJob.set(wait_until: (3.months.from_now + 5.days)).perform_later(@request.id)
-        redirect_to request_path(@request)
-      else
-        redirect_to request_path(@request)
       end
+        redirect_to request_path(@request)
     end
     if @request.status == 'expired'
       flash[:notice] = "Sorry your subscription has expired, please subscribe again"
@@ -64,18 +63,8 @@ class RequestsController < ApplicationController
   end
 
   def list
-  @counter = 1
-    if @request.status == "confirmed"
-      @list = Request.confirmed.pluck(:id)
-      @list.sort
-    elsif @request.status == "accepted"
-      if @list != nil
-        @list.delete_at(@list.index(@request.id).to_i)
-      end
-    elsif @request.status == "expired"
-      if @list != nil
-        @list.delete_at(@list.index(@request.id).to_i)
-      end
-    end
+    @counter = 1
+    @requests_confirmed = Request.confirmed.pluck(:id)
+    @list = @requests_confirmed.sort.each {|request| Request.find(request).date}
   end
 end

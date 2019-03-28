@@ -3,12 +3,13 @@
 <p>
   Your subscription on our French Coworking waiting list is expiring in 5 days.
   You are currently on place
-<% @list = Request.confirmed.pluck(:id) %>
+<% @requests_confirmed = Request.confirmed.pluck(:id) %>
+<% @list = @requests_confirmed.sort.each {|request| Request.find(request).date} %>
 <%counter = 1 %>
-<%= counter += @list.sort.index(@request.id).to_i %>
-
+<%= counter += @list.index(@request.id)%>
 in our waiting list. If you still want to be on our list, please click on the link below to reconfirm your subscription:
-  <%= link_to "Re-confirm my subscription", confirm_three_months_request_url(@request)%>
+  <%= link_to "Re-confirm my subscription", confirm_three_months_request_url(@request) %>
+
 </p>
 
 <p> Thank you and see you soon </p>

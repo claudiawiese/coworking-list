@@ -10,7 +10,7 @@
           <p>Phone Number: <%=@request.phone%></p>
           <p>Status: <%=@request.status%></p>
           <% if @list !=nil%>
-          <p class="place">Place: <%= @counter += @list.sort.index(@request.id).to_i %></p>
+          <p class="place">Place: <%= @counter += @list.index(@request.id).to_i %></p>
           <% end %>
         </div>
         <div class="card-description">
@@ -27,4 +27,5 @@
       <a class="btn btn-primary btn-lg",  href="/requests">Waiting List</a>
     </div>
   </div>
-</div
+</div>
+
