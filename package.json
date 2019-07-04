@@ -5,9 +5,15 @@
     "@rails/webpacker": "^4.0.2",
     "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.7"
+    "popper.js": "^1.14.7",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.2.1"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
