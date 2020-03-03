@@ -134,7 +134,8 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (4.3.3)
+      nio4r (~> 2.0)
     raabro (1.1.6)
     rack (2.0.6)
     rack-protection (2.0.5)
@@ -252,7 +253,7 @@ DEPENDENCIES
   postmark-rails
   pry-byebug
   pry-rails
-  puma
+  puma (>= 3.12.4)
   rails (= 5.2.2)
   redis
   sassc-rails
@@ -271,4 +272,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   2.0.1
+   1.17.3
