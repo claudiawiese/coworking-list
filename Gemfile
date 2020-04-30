@@ -28,7 +28,7 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
-gem 'postmark-rails'
+gem 'postmark-rails', '>= 0.19.0'
 
 gem 'letter_opener', group: :development
 gem 'whenever', require: false
