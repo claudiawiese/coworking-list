@@ -5,18 +5,18 @@ gem 'bootsnap', require: false
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
-gem 'rails', '5.2.2'
+gem 'rails', '5.2.4.4'
 gem 'redis'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
-gem 'sassc-rails'
-gem 'simple_form'
+gem 'sassc-rails', '>= 2.1.0'
+gem 'simple_form', '>= 4.1.0'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '>= 4.0.2'
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 3.7.0'
 end
 
 group :development, :test do
@@ -25,10 +25,10 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '>= 2.7.1'
 end
 
-gem 'postmark-rails'
+gem 'postmark-rails', '>= 0.19.0'
 
 gem 'letter_opener', group: :development
 gem 'whenever', require: false
