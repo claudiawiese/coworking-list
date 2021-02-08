@@ -40,4 +40,4 @@ gem "sidekiq-cron", "~> 1.1"
 
 #cloudinary gems to upload avatars
 gem 'cloudinary', '~> 1.9.1'
-gem 'carrierwave', '~> 1.2'
+gem 'carrierwave', '~> 1.3'
