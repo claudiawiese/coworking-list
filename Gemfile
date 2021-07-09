@@ -30,7 +30,7 @@ end
 
 gem 'postmark-rails'
 
-gem 'letter_opener', group: :development
+gem 'letter_opener', '>= 1.7.0', group: :development
 gem 'whenever', require: false
 
 #sidekiq gems for delayed jobs
