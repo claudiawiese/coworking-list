@@ -16,7 +16,7 @@ gem 'uglifier'
 gem 'webpacker'
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 3.7.0'
 end
 
 group :development, :test do
