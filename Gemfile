@@ -5,18 +5,18 @@ gem 'bootsnap', require: false
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
-gem 'rails', '5.2.2'
+gem 'rails', '7.0.8.1'
 gem 'redis'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
-gem 'sassc-rails'
-gem 'simple_form'
+gem 'sassc-rails', '>= 2.1.1'
+gem 'simple_form', '>= 5.0.0'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '>= 4.0.3'
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 4.0.0'
 end
 
 group :development, :test do
@@ -25,19 +25,19 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '>= 2.7.6'
 end
 
-gem 'postmark-rails'
+gem 'postmark-rails', '>= 0.20.0'
 
 gem 'letter_opener', group: :development
 gem 'whenever', require: false
 
 #sidekiq gems for delayed jobs
-gem 'sidekiq'
-gem 'sidekiq-failures', '~> 1.0'
-gem "sidekiq-cron", "~> 1.1"
+gem 'sidekiq', '>= 5.2.6'
+gem 'sidekiq-failures', '~> 1.0', '>= 1.0.1'
+gem "sidekiq-cron", "~> 1.2", ">= 1.2.0"
 
 #cloudinary gems to upload avatars
 gem 'cloudinary', '~> 1.9.1'
-gem 'carrierwave', '~> 1.2'
+gem 'carrierwave', '~> 2.2', '>= 2.2.6'
