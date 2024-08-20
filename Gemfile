@@ -36,7 +36,7 @@ gem 'whenever', require: false
 #sidekiq gems for delayed jobs
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
-gem "sidekiq-cron", "~> 1.1"
+gem "sidekiq-cron", "~> 1.2", ">= 1.2.0"
 
 #cloudinary gems to upload avatars
 gem 'cloudinary', '~> 1.9.1'
